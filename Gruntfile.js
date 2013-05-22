@@ -45,7 +45,7 @@ module.exports = function(grunt) {
       source:{
         src: ['build/files/combined.video.js', 'build/compiler/goog.base.js', 'src/js/exports.js'],
         externs: ['src/js/media/flash.externs.js'],
-        dest: 'build/files/minified.video.js'
+        dest: '../kc/sellstage/st/build/vjs.min.js'
       },
       tests: {
         src: ['build/files/combined.video.js', 'build/compiler/goog.base.js', 'src/js/exports.js', 'test/unit/*.js', '!test/unit/api.js'],
@@ -110,7 +110,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('contribflow');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'build', 'minify', 'dist']);
+  grunt.registerTask('default', ['jshint', 'build', 'minify', ]); //'dist'
   // Development watch task
   grunt.registerTask('dev', ['jshint', 'build', 'qunit:source']);
   grunt.registerTask('test', ['jshint', 'build', 'minify', 'qunit']);
@@ -176,12 +176,12 @@ module.exports = function(grunt) {
     }
 
     var command = 'java -jar build/compiler/compiler.jar'
-                + ' --compilation_level ADVANCED_OPTIMIZATIONS'
+                // ' --compilation_level ADVANCED_OPTIMIZATIONS'
                 // + ' --formatting=pretty_print'
                 + ' --js_output_file=' + dest
-                + ' --create_source_map ' + dest + '.map --source_map_format=V3'
-                + ' --jscomp_warning=checkTypes --warning_level=VERBOSE'
-                + ' --output_wrapper "/*! ' + pkg.copyright + ' */\n (function() {%output%})();//@ sourceMappingURL=video.js.map"';
+                //+ ' --create_source_map ' + dest + '.map --source_map_format=V3'
+                //+ ' --jscomp_warning=checkTypes --warning_level=QUIET'
+                //+ ' --output_wrapper "/*! ' + pkg.copyright + ' */\n (function() {%output%})();//@ sourceMappingURL=video.js.map"';
 
     grunt.file.expand(filePatterns).forEach(function(file){
       command += ' --js='+file;
@@ -191,7 +191,7 @@ module.exports = function(grunt) {
       command += ' --externs='+extern;
     });
 
-    // grunt.log.writeln(command)
+    grunt.log.writeln(command)
 
     exec(command, { maxBuffer: 500*1024 }, function(err, stdout, stderr){
 

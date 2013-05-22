@@ -13,6 +13,7 @@ vjs.Component = vjs.CoreObject.extend({
   /** @constructor */
   init: function(player, options, ready){
     this.player_ = player;
+    this.enabled = true;
 
     // Make a copy of prototype.options_ to protect against overriding global defaults
     this.options_ = vjs.obj.copy(this.options_);
@@ -524,8 +525,10 @@ vjs.Component.prototype.removeClass = function(classToRemove){
  * @return {vjs.Component}
  */
 vjs.Component.prototype.show = function(){
-  this.el_.style.display = 'block';
-  return this;
+  if (this.enabled){ 
+    this.el_.style.display = 'block';
+    return this;
+  }
 };
 
 /**
@@ -542,9 +545,11 @@ vjs.Component.prototype.hide = function(){
  * @return {vjs.Component}
  */
 vjs.Component.prototype.fadeIn = function(){
-  this.removeClass('vjs-fade-out');
-  this.addClass('vjs-fade-in');
-  return this;
+  if (this.enabled){ 
+    this.removeClass('vjs-fade-out');
+    this.addClass('vjs-fade-in');
+    return this;
+  }
 };
 
 /**
@@ -580,8 +585,12 @@ vjs.Component.prototype.unlockShowing = function(){
  */
 vjs.Component.prototype.disable = function(){
   this.hide();
-  this.show = function(){};
-  this.fadeIn = function(){};
+  this.enabled = false;
+};
+
+vjs.Component.prototype.enable = function(){
+   this.enabled = true;
+   this.show();
 };
 
 // TODO: Get enable working

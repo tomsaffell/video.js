@@ -27,13 +27,13 @@ vjs.Html5 = vjs.MediaTechController.extend({
 
     // If the element source is already set, we may have missed the loadstart event, and want to trigger it.
     // We don't want to set the source again and interrupt playback.
-    if (source && this.el_.currentSrc == source.src) {
-      player.trigger('loadstart');
-
-    // Otherwise set the source if one was provided.
-    } else if (source) {
-      this.el_.src = source.src;
-    }
+    // we always set the src, so it restarts from the beginning (TCS)
+    if (source) {
+      if (this.el_.currentSrc == source.src){
+         player.trigger('loadstart');
+      }
+      this.el_.src = source.src; 
+    } 
 
     // Chrome and Safari both have issues with autoplay.
     // In Safari (5.1.1), when we move the video element into the container div, autoplay doesn't work.
@@ -81,7 +81,10 @@ vjs.Html5.prototype.createEl = function(){
     }
     // associate the player with the new tag
     el['player'] = player;
-
+    
+  }
+  
+  if (!el.parentNode){
     vjs.insertFirst(el, player.el());
   }
 
@@ -115,7 +118,9 @@ vjs.Html5.prototype.eventHandler = function(e){
 };
 
 
-vjs.Html5.prototype.play = function(){ this.el_.play(); };
+vjs.Html5.prototype.play = function(){ 
+   this.el_.play(); 
+   };
 vjs.Html5.prototype.pause = function(){ this.el_.pause(); };
 vjs.Html5.prototype.paused = function(){ return this.el_.paused; };
 
@@ -171,7 +176,9 @@ vjs.Html5.prototype.enterFullScreen = function(){
 vjs.Html5.prototype.exitFullScreen = function(){
   this.el_.webkitExitFullScreen();
 };
-vjs.Html5.prototype.src = function(src){ this.el_.src = src; };
+vjs.Html5.prototype.src = function(src){ 
+   this.el_.src = src; 
+};
 vjs.Html5.prototype.load = function(){ this.el_.load(); };
 vjs.Html5.prototype.currentSrc = function(){ return this.el_.currentSrc; };
 

@@ -18,3 +18,5 @@ sandbox/*
 *.swo
 
 *.orig
+
+Gruntfile.js

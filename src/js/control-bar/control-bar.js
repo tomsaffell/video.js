@@ -9,9 +9,19 @@ vjs.ControlBar = vjs.Component.extend({
   init: function(player, options){
     vjs.Component.call(this, player, options);
 
+    var controls = this;
+    
     if (!player.controls()) {
       this.disable();
     }
+    
+    this.player_.on('controlschange',function(){
+      if (!player.controls()) {
+         controls.disable();
+      } else {
+         controls.enable();
+      }
+    });
 
     player.one('play', vjs.bind(this, function(){
       var touchstart,
@@ -26,6 +36,8 @@ vjs.ControlBar = vjs.Component.extend({
         this.player_.on('pause', vjs.bind(this, this.lockShowing));
         this.player_.on('play', vjs.bind(this, this.unlockShowing));
       }
+      
+      
 
       touchstart = false;
       this.player_.on('touchstart', function() {
