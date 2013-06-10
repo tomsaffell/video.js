@@ -20,6 +20,7 @@ vjs.Player = vjs.Component.extend({
     // Cache for video property values.
     this.cache_ = {};
 
+    
     // Set poster
     this.poster_ = options['poster'];
     // Set controls
@@ -139,7 +140,6 @@ vjs.Player.prototype.getTagSettings = function(tag){
 vjs.Player.prototype.createEl = function(){
   var el = this.el_ = vjs.Component.prototype.createEl.call(this, 'div');
   var tag = this.tag;
-
   // Remove width/height attrs from tag so CSS can make it 100% width/height
   tag.removeAttribute('width');
   tag.removeAttribute('height');

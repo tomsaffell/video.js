@@ -69,8 +69,11 @@ vjs.Html5.prototype.createEl = function(){
   // So we have to create a brand new element.
   if (!el || this.features.movingMediaElementInDOM === false) {
 
+      
     // If the original tag is still there, remove it.
     if (el) {
+      el['player'] = null;
+      player.tag = null;
       player.el().removeChild(el);
       el = el.cloneNode(false);
     } else {
@@ -83,13 +86,17 @@ vjs.Html5.prototype.createEl = function(){
     el['player'] = player;
     
   }
-  
   if (!el.parentNode){
     vjs.insertFirst(el, player.el());
   }
-
+  
   // Update specific tag settings, in case they were overridden
   var attrs = ['autoplay','preload','loop','muted'];
+  
+  if (player.options_.controls && player.options_['customControlsOnMobile'] !== true && (vjs.IS_IOS || vjs.IS_ANDROID)) {
+    attrs.push('controls');
+  }
+  
   for (var i = attrs.length - 1; i >= 0; i--) {
     var attr = attrs[i];
     if (player.options_[attr] !== null) {

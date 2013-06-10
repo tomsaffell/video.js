@@ -176,7 +176,7 @@ module.exports = function(grunt) {
     }
 
     var command = 'java -jar build/compiler/compiler.jar'
-                // ' --compilation_level ADVANCED_OPTIMIZATIONS'
+                + ' --compilation_level WHITESPACE_ONLY'
                 // + ' --formatting=pretty_print'
                 + ' --js_output_file=' + dest
                 //+ ' --create_source_map ' + dest + '.map --source_map_format=V3'
