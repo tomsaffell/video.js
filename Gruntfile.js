@@ -45,7 +45,7 @@ module.exports = function(grunt) {
       source:{
         src: ['build/files/combined.video.js', 'build/compiler/goog.base.js', 'src/js/exports.js'],
         externs: ['src/js/media/flash.externs.js'],
-        dest: '../kc/sellstage/st/build/vjs.min.js'
+        dest: '../vp/webapp/st/build/vjs.min.js'
       },
       tests: {
         src: ['build/files/combined.video.js', 'build/compiler/goog.base.js', 'src/js/exports.js', 'test/unit/*.js', '!test/unit/api.js'],

@@ -93,9 +93,13 @@ vjs.Html5.prototype.createEl = function(){
   // Update specific tag settings, in case they were overridden
   var attrs = ['autoplay','preload','loop','muted'];
   
-  if (player.options_.controls && player.options_['customControlsOnMobile'] !== true && (vjs.IS_IOS || vjs.IS_ANDROID)) {
-    attrs.push('controls');
-  }
+  if (player.options_.controls){
+    if (player.options_['customControlsOnMobile'] !== true && (vjs.IS_IOS || vjs.IS_ANDROID)){
+      attrs.push('controls');
+    } else {
+      player.controls(true);
+    }
+  }  
   
   for (var i = attrs.length - 1; i >= 0; i--) {
     var attr = attrs[i];
