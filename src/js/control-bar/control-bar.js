@@ -72,6 +72,7 @@ vjs.ControlBar = vjs.Component.extend({
 vjs.ControlBar = vjs.Component.extend();
 
 
+
 vjs.ControlBar.prototype.options_ = {
   loadEvent: 'play',
   children: {

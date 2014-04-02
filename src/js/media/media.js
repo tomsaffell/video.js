@@ -49,7 +49,7 @@ vjs.MediaTechController.prototype.initControlsListeners = function(){
   player = this.player();
 
   var activateControls = function(){
-    if (player.controls() && !player.usingNativeControls()) {
+    if (player.controls() && !player.usingNativeControls() && tech.el_) {
       tech.addControlsListeners();
     }
   };
@@ -62,6 +62,7 @@ vjs.MediaTechController.prototype.initControlsListeners = function(){
   player.on('controlsenabled', activateControls);
   player.on('controlsdisabled', deactivateControls);
 };
+
 
 vjs.MediaTechController.prototype.addControlsListeners = function(){
   var userWasActive;
