@@ -235,8 +235,12 @@ vjs.getData = function(el){
  * @private
  */
 vjs.hasData = function(el){
-  var id = el[vjs.expando];
-  return !(!id || vjs.isEmpty(vjs.cache[id]));
+  try{
+    var id = el[vjs.expando];
+    return !(!id || vjs.isEmpty(vjs.cache[id]));
+  }catch(err){
+    return false;
+  }
 };
 
 /**

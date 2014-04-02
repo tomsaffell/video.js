@@ -54,7 +54,7 @@ module.exports = function(grunt) {
         src: ['build/files/combined.video.js', 'build/compiler/goog.base.js', 'src/js/exports.js'],
 
         externs: ['src/js/player.externs.js', 'src/js/media/flash.externs.js'],
-        dest: '../vp/webapp/st/build/vjs.min.js'
+        dest: '../vp/webapp/st/build/vjs.4.5.min.js'
 
       },
       tests: {
@@ -216,9 +216,9 @@ module.exports = function(grunt) {
 
   // Default task.
 
-  //grunt.registerTask('default', ['jshint', 'build', 'minify', ]); //TCS version
+  grunt.registerTask('default', ['jshint', 'build', 'minify', ]); //TCS version
 
-  grunt.registerTask('default', ['jshint', 'less', 'build', 'minify', 'usebanner', 'dist']);
+  //grunt.registerTask('default', ['jshint', 'less', 'build', 'minify', 'usebanner', 'dist']);
 
   // Development watch task
   grunt.registerTask('dev', ['jshint', 'less', 'build', 'qunit:source']);
